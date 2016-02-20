@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:text="@string/dialog_apostar"
+        android:id="@+id/textView"
+        android:layout_gravity="center"
+        android:background="#07570E"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/montoBet"
+        android:inputType="number"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:hint="@string/dialog_monto"
+        android:padding="10dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/dialog_apostarX"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:textSize="16dp"
+        android:paddingBottom="5dp" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/spinnerCompetitor" />
+</LinearLayout>
