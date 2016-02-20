@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.AsyncTask;
 
 import com.jennifer.connection.ServerConnection;
+import com.jennifer.connection.Shared;
 
 import org.json.JSONObject;
 
@@ -16,27 +17,26 @@ import java.util.List;
 public class CrearPrivadasService extends AsyncTask<String, String, String> {
 
     Activity activity;
+
     String titulo;
     String descripcion;
     String fecha;
-    String tipoApuesta;
+    String hora;
+    int tipoApuesta;
     Double premio;
-    int contadorUsuarios;
-    int contadorRespuestas;
     List<String> usuarios = new ArrayList<String>();
     List<String> respuestas = new ArrayList<String>();
 
-    public CrearPrivadasService(Activity activity, String titulo, String descripcion, String fecha, String tipoApuesta, Double premio, List<String> usuarios, List<String> respuestas, int contadorUsuarios, int contadorRespuestas) {
+    public CrearPrivadasService(Activity activity, String titulo, String descripcion, String fecha, String hora, int tipoApuesta2, Double premio, List<String> usuarios, List<String> respuestas) {
         this.activity = activity;
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.fecha = fecha;
-        this.tipoApuesta = tipoApuesta;
+        this.hora = hora;
+        this.tipoApuesta = tipoApuesta2;
         this.premio = premio;
         this.usuarios = usuarios;
         this.respuestas = respuestas;
-        this.contadorUsuarios = contadorUsuarios;
-        this.contadorRespuestas = contadorRespuestas;
     }
 
     @Override
@@ -44,6 +44,9 @@ public class CrearPrivadasService extends AsyncTask<String, String, String> {
         int i = 1;
         String users = "";
         String options = "";
+
+        Shared s = new Shared();
+        int idUser  = s.getShared(this.activity,"ID");
 
         for (String row : usuarios) {
             users += row + "|";
@@ -63,12 +66,15 @@ public class CrearPrivadasService extends AsyncTask<String, String, String> {
 
         parametros.append("name").append("=").append(titulo).append("&")
                 .append("description").append("=").append(descripcion).append("&")
-                .append("dateTime").append("=").append(fecha).append("&")
+                .append("date").append("=").append(fecha).append("&")
+                .append("time").append("=").append(hora).append("&")
                 .append("typeBet").append("=").append(tipoApuesta).append("&")
+                .append("creator").append("=").append(idUser).append("&")
                 .append("award").append("=").append(premio).append("&")
                 .append("users").append("=").append(users).append("&")
                 .append("options").append("=").append(options);
 
+        System.out.println(fecha);
         System.out.println("Users: " + users);
         System.out.println("Options: " + options);
         System.out.println("Parametros: " + parametros.toString());
