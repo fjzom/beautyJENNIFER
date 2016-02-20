@@ -32,6 +32,7 @@ import android.widget.TextView;
 
 import com.jennifer.R;
 import com.jennifer.connection.ServerConnection;
+import com.jennifer.connection.Shared;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -303,8 +304,10 @@ public class LoginController extends AppCompatActivity implements LoaderCallback
 
         private final String URL = "http://excellentprogrammers.esy.es/Script/Login/Login.php";
         private final String SUCCESS = "success";
+        private final String ID = "id";
         private final String mEmail;
         private final String mPassword;
+        private Integer idUser;
 
         UserLoginTask(String email, String password) {
             mEmail = email;
@@ -326,10 +329,12 @@ public class LoginController extends AppCompatActivity implements LoaderCallback
                 try {
                     json = serverConnection.makeHttpRequestPost(URL, urlParams.toString());
                     succes = json.getBoolean(SUCCESS);
+                    idUser = json.getInt(ID);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
+            new Shared().setShared(LoginController.this, idUser, "ID");
             return true;
 //            return succes;
         }
