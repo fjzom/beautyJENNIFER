@@ -46,6 +46,7 @@ public class ApPublicasAdapter extends ArrayAdapter<ApPublicas>{
         }
 
         ApPublicas apPublicas = datos[position];
+        holder.idApuesta = apPublicas.getId();
         holder.nombreApuesta.setText(apPublicas.getName());
         holder.descripcionApuesta.setText(apPublicas.getDescription());
         return row;
@@ -54,6 +55,7 @@ public class ApPublicasAdapter extends ArrayAdapter<ApPublicas>{
     /* Clase interna que mantiene los datos*/
     static class ApPublicasHolder{
         ImageView imagen; //TODO hay que sacar la imagen de la base de datos
+        int idApuesta;
         TextView nombreApuesta;
         TextView descripcionApuesta;
     }

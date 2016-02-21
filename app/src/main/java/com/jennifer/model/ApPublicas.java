@@ -4,14 +4,14 @@ package com.jennifer.model;
  * Created by Juan Rdz on 31/01/2016.
  */
 public class ApPublicas {
-    private String Id;
+    private int Id;
     private String Name;
     private String Description;
     private String FinalResult;
     private String DateTime;
     private String Award;
 
-    public void setId(String Id) {
+    public void setId(int Id) {
         this.Id = Id;
     }
 
@@ -35,7 +35,7 @@ public class ApPublicas {
         this.Award = Award;
     }
 
-    public String getId() {
+    public int getId() {
         return Id;
     }
 

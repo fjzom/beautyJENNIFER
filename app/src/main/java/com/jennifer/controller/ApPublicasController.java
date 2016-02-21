@@ -33,7 +33,7 @@ import java.lang.reflect.Type;
 import java.util.Collection;
 
 public class ApPublicasController extends AppCompatActivity {
-
+    private int compElegido = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +47,7 @@ public class ApPublicasController extends AppCompatActivity {
         }
 
     }
-
+    /* Clase interna que se utiliza para obtener la lista completa de apuestas publicas disponibles */
     public class ListLoad extends AsyncTask<Void, Void, Boolean> {
         private ApPublicas[] jsonList;
         private Context contexto;
@@ -92,7 +92,7 @@ public class ApPublicasController extends AppCompatActivity {
             listaPublicas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    new CompetitorLoad(contexto, position).execute((Void) null);
+                    new CompetitorLoad(contexto, jsonList[position].getId()).execute((Void) null);
                 }
             });
         }
@@ -107,10 +107,10 @@ public class ApPublicasController extends AppCompatActivity {
     }
 
     /* Funcion que muestra una ventana de dialogo para hacer la apuesta */
-    protected void showInputDialog(ApPublicaCompetidor[] competitorList) {
+    protected void showInputDialog(final ApPublicaCompetidor[] competitorList,final Context contexto, final int idApuesta) {
         LayoutInflater layoutInflater = LayoutInflater.from(this);
-        View promptView = layoutInflater.inflate(R.layout.dialog_apuestas_publicas, null);
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        final View promptView = layoutInflater.inflate(R.layout.dialog_apuestas_publicas, null);
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setView(promptView);
 
         final EditText editText = (EditText) promptView.findViewById(R.id.montoBet);
@@ -119,7 +119,8 @@ public class ApPublicasController extends AppCompatActivity {
         alertDialogBuilder.setCancelable(false)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        //TODO aqui va lo que va a suceder cuando se de aceptar al dialogo
+                        double montoApuesta =  Double.parseDouble(editText.getText().toString());
+                        procesaDatos(compElegido, idApuesta, montoApuesta);
                     }
                 })
                 .setNegativeButton("Cancel",
@@ -135,8 +136,18 @@ public class ApPublicasController extends AppCompatActivity {
         ArrayAdapter<ApPublicaCompetidor> adap = new ArrayAdapter<ApPublicaCompetidor>(this, android.R.layout.simple_spinner_item, competitorList);
         adap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adap);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                compElegido  = competitorList[pos].getId();
+            }
+
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
     }
 
+    /* Clase interna que se utiliza para obtener la lista de los competidores de la apuesta seleccionada */
     public class CompetitorLoad extends AsyncTask<Void, Void, Boolean> {
         private ApPublicaCompetidor[] jsonCompetitor;
         private Context contexto;
@@ -177,7 +188,61 @@ public class ApPublicasController extends AppCompatActivity {
         @Override
         protected void onPostExecute(final Boolean success) {
             progress.dismiss();
-            showInputDialog(jsonCompetitor);
+            showInputDialog(jsonCompetitor, contexto, this.matchId);
         }
     }
+
+    /* Funcion que procesa la apuesta seleccionada para participar */
+    private void procesaDatos(int compElegido, int idBet, double montoApuesta){
+        int idUsuario = 1;
+        int idApuesta = idBet;
+        int compSelec = compElegido;
+        double qtyApostada = montoApuesta;
+
+        StringBuilder datos = new StringBuilder();
+        datos.append("&idUser="+idUsuario);
+        datos.append("&idApu="+idApuesta);
+        datos.append("&comSel="+compElegido);
+        datos.append("&qty="+qtyApostada);
+
+        new ParticiparApuesta(this, datos.toString()).execute((Void) null);
+    }
+
+    /* Clase interna que se utiliza para procesar la apuesta seleccionada para participar */
+    public class ParticiparApuesta extends AsyncTask<Void, Void, Boolean> {
+        private ApPublicaCompetidor[] jsonCompetitor;
+        private Context contexto;
+        private ProgressDialog progress;
+        String datos = new String();
+
+        public ParticiparApuesta(Context context, String datos) {
+            super();
+            this.contexto = context;
+            this.datos = datos;
+        }
+
+        @Override
+        public void onPreExecute() {
+            progress = ProgressDialog.show(contexto, "Procesando", "Procesando su elección, espere...", true);
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            try {
+                OkHttpClient client = new OkHttpClient();
+                Request request = new Request.Builder().url("http://excellentprogrammers.esy.es/Script/apPublicas/apPublic.php?TFX=PAP"+datos).build();
+                Response response = client.newCall(request).execute();
+            } catch (IOException e) {
+                e.getStackTrace();
+            }
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(final Boolean success) {
+            progress.dismiss();
+            Toast.makeText(contexto, "Apuesta completada", Toast.LENGTH_LONG).show();
+        }
+    }
+
 }

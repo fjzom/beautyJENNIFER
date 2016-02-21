@@ -4,10 +4,10 @@ package com.jennifer.model;
  * Created by Juan Rdz on 06/02/2016.
  */
 public class ApPublicaCompetidor{
-    private String Id;
+    private int Id;
     private String Description;
 
-    public void setId(String Id) {
+    public void setId(int Id) {
         this.Id = Id;
     }
 
@@ -15,7 +15,7 @@ public class ApPublicaCompetidor{
         this.Description = Description;
     }
 
-    public String getId() {
+    public int getId() {
         return Id;
     }
 
