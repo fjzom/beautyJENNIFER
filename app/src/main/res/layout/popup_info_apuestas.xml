@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:background="#ffffff">
 
     <TextView
         android:layout_width="match_parent"
@@ -22,9 +23,10 @@
         android:layout_height="wrap_content"
         android:text="@string/descripcion"
         android:id="@+id/textView2"
-        android:background="#000000"
+        android:background="#ffffff"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.11" />
+        android:layout_weight="0.11"
+        android:layout_below="@+id/textView" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -36,14 +38,15 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:textColor="#030303"
-        android:background="#000000"
+        android:background="#ffffff"
         android:textSize="20dp" />
 
     <View style="@style/Divider"
         android:layout_alignTop="@+id/textView5"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:background="#010101" />
+        android:background="#010101"
+        android:id="@+id/view2" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -55,15 +58,17 @@
         android:textSize="20dp"
         android:layout_marginTop="02dp"
         android:layout_below="@+id/textView3"
-        android:background="#000000"
+        android:background="#ffffff"
         android:layout_alignRight="@+id/textView5"
-        android:layout_alignEnd="@+id/textView5" />
+        android:layout_alignEnd="@+id/textView5"
+        android:autoText="false" />
 
     <View style="@style/Divider"
-        android:layout_alignBottom="@+id/textView4"
+        android:background="#000000"
+        android:layout_below="@+id/textView3"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:background="#000000" />
+        android:id="@+id/view" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -82,6 +87,41 @@
         android:layout_alignBottom="@+id/textView5"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:background="#000000" />
+        android:background="#000000"
+        android:id="@+id/view3" />
 
-</LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/textView10"
+        android:layout_above="@+id/textView4"
+        android:layout_toRightOf="@+id/textView3"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/textView11"
+        android:layout_alignTop="@+id/textView4"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/textView4"
+        android:layout_toEndOf="@+id/textView4" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/textView12"
+        android:layout_above="@+id/view3"
+        android:layout_toRightOf="@+id/textView5"
+        android:layout_alignRight="@+id/textView11"
+        android:layout_alignEnd="@+id/textView11" />
+
+</RelativeLayout>
