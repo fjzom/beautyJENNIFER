@@ -21,6 +21,8 @@ import com.jennifer.model.User;
 
 import java.util.List;
 
+import static android.view.Gravity.CENTER;
+
 /**
  * Created by echessa on 7/24/15.
  */
@@ -36,6 +38,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_row, viewGroup, false);
+
 
         return new ViewHolder(v);
     }
@@ -69,16 +72,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             @Override
             public void onClick(View view) {
                 Context context = view.getContext();
-
-
                 layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                ViewGroup container = (ViewGroup)layoutInflater.inflate(R.layout.popup_info_apuestas,null);
+                ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.popup_info_apuestas, null);
 
-			   popUpWindow = new PopupWindow(container,1000,750,true);
- /*               popUpWindow.setBackgroundDrawable(new ColorDrawable(
-                        android.graphics.Color.TRANSPARENT));*/
-                popUpWindow.showAtLocation(view, Gravity.NO_GRAVITY,500,500);
+                popUpWindow = new PopupWindow(container, 600, 750, true);
+                popUpWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
                 view.setAlpha(1);
+
 
                 container.setOnTouchListener(new View.OnTouchListener() {
                     @Override
@@ -87,7 +87,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                         return false;
                     }
                 });
-
 
             }
         });

@@ -3,15 +3,26 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/nombre_apuesta"
         android:text="@string/apuestas_publicas"
         style="@style/TitleBetList" />
-    <ListView
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView_apPub"
-        android:layout_weight="1" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp">
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/listView_apPub"
+            android:dividerHeight="8dp"
+            android:contextClickable="false"
+            android:clickable="false" />
+    </LinearLayout>
 </LinearLayout>

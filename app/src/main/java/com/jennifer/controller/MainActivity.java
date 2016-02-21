@@ -13,13 +13,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.jennifer.R;
 import com.jennifer.adapter.TabAdapter;
 
 public class MainActivity extends AppCompatActivity
         implements OnNavigationItemSelectedListener {
-
+    public static String user = new String();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +58,11 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
+        TextView userName = (TextView) findViewById(R.id.userName);
+        TextView userEmail = (TextView) findViewById(R.id.userEmail);
+        userName.setText(user.split("@")[0].toUpperCase());
+        userEmail.setText(user);
         return true;
     }
 

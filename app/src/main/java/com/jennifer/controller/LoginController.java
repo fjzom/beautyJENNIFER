@@ -348,6 +348,7 @@ public class LoginController extends AppCompatActivity implements LoaderCallback
                 finish();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
+                MainActivity.user = mEmail;
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();

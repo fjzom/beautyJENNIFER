@@ -52,13 +52,13 @@ public class TabFragment extends android.support.v4.app.Fragment {
                 break;
             case 2:
                 v = inflater.inflate(R.layout.fragment_list_view, container, false);
-                service = new UsuariosApuestasPrivadasService(getActivity(), v, 2);
+                service = new UsuariosApuestasPrivadasService(getActivity(), v, 0);
                 service.execute();
                 break;
             case 3:
                 items = new ArrayList<User>();
-                for (int i = 0; i < 50; i++) {
-                    items.add(new User("titulo " + (i + 1), R.mipmap.ic_launcher));
+                for (int i = 0; i < 10; i++) {
+                        items.add(new User("titulo " + (i + 1), R.mipmap.chida));
                 }
                 v = inflater.inflate(R.layout.fragment_list_view, container, false);
                 recyclerView = (RecyclerView) v.findViewById(R.id.recyclerview);

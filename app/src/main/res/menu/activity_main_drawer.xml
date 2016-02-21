@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/apu_publicas"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/icon_games_public"
             android:title="@string/apuestas_publicas" />
 
         <item
             android:id="@+id/crear_privadas"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/icon_game_private"
             android:title="@string/crear_privada" />
         <!--item
             android:id="@+id/nav_gallery"

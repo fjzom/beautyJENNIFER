@@ -13,6 +13,7 @@ import com.jennifer.R;
 import com.jennifer.adapter.UsuariosApuestasPrivadaAdapter;
 import com.jennifer.connection.ServerConnection;
 import com.jennifer.model.UsuarioApuestaPrivada;
+import com.jennifer.connection.Shared;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,9 +57,9 @@ public class UsuariosApuestasPrivadasService extends AsyncTask<Void, Void, Boole
         JSONObject json;
         JSONObject instance;
         UsuarioApuestaPrivada apuestaPrivada;
-
+        int testID = new Shared().getShared(this.fragmentActivity,"ID");
         params.append("type").append("=").append(type).append("&")
-                .append("id").append("=").append(1);
+                .append("id").append("=").append(testID);
 
         json = serverConnection.makeHttpRequestPost(URL, params.toString());
         items = new ArrayList<>();

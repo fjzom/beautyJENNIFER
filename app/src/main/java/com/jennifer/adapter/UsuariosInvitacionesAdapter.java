@@ -38,9 +38,17 @@ public class UsuariosInvitacionesAdapter extends RecyclerView.Adapter<UsuariosIn
 
         return new ViewHolder(v);
     }
+/*
+    public void onBackPressed() {
+        Intent myIntent = new Intent(InvitarContactosController.this, CrearPrivadas.class);
+        myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);// clear back stack
+        startActivity(myIntent);
+        finish();
+        return;
+    }*/
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(final ViewHolder viewHolder, int i) {
         User item = mItems.get(i);
 
         // Data Set
@@ -58,7 +66,8 @@ public class UsuariosInvitacionesAdapter extends RecyclerView.Adapter<UsuariosIn
             @Override
             public void onClick(View view) {
                 Context context = view.getContext();
-                context.startActivity(new Intent(context, SecondActivity.class));
+
+
             }
         });
 
@@ -67,16 +76,13 @@ public class UsuariosInvitacionesAdapter extends RecyclerView.Adapter<UsuariosIn
             @Override
             public void onClick(View view) {
                 Context context = view.getContext();
-            /*    context.startActivity(new Intent(context, SecondActivity.class));
-                Toast.makeText(context, "Your toast message.",
-                        Toast.LENGTH_SHORT).show();*/
                 layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.popup_info_apuestas, null);
-                popUpWindow = new PopupWindow(container, 1000, 750, true);
- /*               popUpWindow.setBackgroundDrawable(new ColorDrawable(
-                        android.graphics.Color.TRANSPARENT));*/
-                popUpWindow.showAtLocation(view, Gravity.NO_GRAVITY, 500, 500);
-                // view.setAlpha(1);
+         
+                popUpWindow = new PopupWindow(container, 600, 750, true);
+                popUpWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+                view.setAlpha(1);
+
 
                 container.setOnTouchListener(new View.OnTouchListener() {
                     @Override
@@ -93,6 +99,8 @@ public class UsuariosInvitacionesAdapter extends RecyclerView.Adapter<UsuariosIn
     public int getItemCount() {
         return mItems.size();
     }
+
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 

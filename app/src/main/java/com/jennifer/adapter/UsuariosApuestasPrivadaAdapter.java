@@ -1,6 +1,8 @@
 package com.jennifer.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -49,11 +51,13 @@ public class UsuariosApuestasPrivadaAdapter extends RecyclerView.Adapter<Usuario
             @Override
             public void onClick(View view) {
                 Context context = view.getContext();
-
                 layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.popup_info_apuestas, null);
-                popUpWindow = new PopupWindow(container, 1000, 750, true);
-                popUpWindow.showAtLocation(view, Gravity.NO_GRAVITY, 500, 500);
+
+                popUpWindow = new PopupWindow(container, 600, 750, true);
+                popUpWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+                view.setAlpha(1);
+
 
                 container.setOnTouchListener(new View.OnTouchListener() {
                     @Override
@@ -62,6 +66,8 @@ public class UsuariosApuestasPrivadaAdapter extends RecyclerView.Adapter<Usuario
                         return false;
                     }
                 });
+
+
             }
         });
     }

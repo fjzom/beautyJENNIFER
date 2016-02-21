@@ -4,7 +4,9 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="10dp"
-    android:background="#ffffff">
+    android:background="#ffffff"
+    android:alpha="1"
+    android:clickable="true">
 
     <TextView
         android:layout_width="match_parent"
@@ -94,7 +96,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
         android:id="@+id/textView10"
         android:layout_above="@+id/textView4"
         android:layout_toRightOf="@+id/textView3"
@@ -105,7 +106,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
         android:id="@+id/textView11"
         android:layout_alignTop="@+id/textView4"
         android:layout_alignParentRight="true"
@@ -117,7 +117,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
         android:id="@+id/textView12"
         android:layout_above="@+id/view3"
         android:layout_toRightOf="@+id/textView5"
