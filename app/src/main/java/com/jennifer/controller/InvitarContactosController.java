@@ -2,6 +2,7 @@ package com.jennifer.controller;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -44,27 +45,19 @@ public class InvitarContactosController extends AppCompatActivity {
             super.finish();
         }
 
-        //Generate list View from ArrayList
-        //displayListView();
-
         checkButtonClick();
-//        buttonInvitarUsuarios();
-    }
-/*
-    private void buttonInvitarUsuarios() {
-        Button myInvitar = (Button) findViewById(R.id.buttonInvitarUsuarios);
-        myInvitar.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-
-                StringBuffer responseText = new StringBuffer();
-                responseText.append("Invitacion exitosa...\n");
-                finish();
-            }
-        });
     }
-*/
+
+
+    public void onBackPressed() {
+        Intent myIntent = new Intent(InvitarContactosController.this, CrearPrivadas.class);
+        myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);// clear back stack
+        startActivity(myIntent);
+        finish();
+        return;
+    }
+
     private void checkButtonClick() {
         Button myButton = (Button) findViewById(R.id.findSelected);
         myButton.setOnClickListener(new View.OnClickListener() {
@@ -73,17 +66,12 @@ public class InvitarContactosController extends AppCompatActivity {
             public void onClick(View v) {
 
                 StringBuffer responseText = new StringBuffer();
-                responseText.append("The following were selected...\n");
+                responseText.append("Tus contactos han sido invitados...\n");
 
-                Contactos[] contactosList = dataAdapter.contactosList;
-                for (int i = 0; i < contactosList.length; i++) {
-                    Contactos contactos = contactosList[i];
-                    if (contactos.isSelected()) {
-                        responseText.append("\n" + contactos.getName());
-                    }
-                }
                 Toast.makeText(getApplicationContext(),
                         responseText, Toast.LENGTH_LONG).show();
+                onBackPressed();
+
             }
         });
     }
